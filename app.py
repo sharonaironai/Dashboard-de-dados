@@ -7,7 +7,11 @@ st.set_page_config(
 )
 
 st.title("Dashboard de Dados")
-arquivo = 's2t6101.xls'
+arquivo = st.file_uploader(
+    "Envie o arquivo",
+    type=["xls", "xlsx", "csv"]
+)
+
 if arquivo is not None:
     if arquivo.endswith(('.xls', '.xlsx')):
         df_raw = pd.read_excel(arquivo, skiprows=7, header=None)

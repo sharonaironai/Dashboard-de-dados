@@ -11,7 +11,7 @@ st.title("Dashboard de Dados")
 arquivo = "dados.csv"
 if arquivo is not None:
     df = pd.read_csv(arquivo)
-    df_raw = pd.read_excel(arquivo, skiprows=7, header=None)
+    df_raw = pd.read_csv(arquivo, skiprows=7, header=None)
     df = df_raw.iloc[:28, :6].copy()
     df.columns = ["UF", "Absoluto_2021", "Absoluto_2022", "Taxa_2021", "Taxa_2022", "Variacao_Pct"]
     df["UF"] = df["UF"].astype(str).str.replace(r"\s*\(\d+\)", "", regex=True).str.strip()

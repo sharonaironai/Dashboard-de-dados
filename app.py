@@ -10,7 +10,7 @@ st.title("Dashboard de Dados")
 arquivo = 's2t6101.xls'
 
 if arquivo is not None:
-    if arquivo.name.endswith(('.xls', '.xlsx')):
+    if arquivo.endswith(('.xls', '.xlsx')):
         df_raw = pd.read_excel(arquivo, skiprows=7, header=None)
         df = df_raw.iloc[:28, :6].copy()
         df.columns = ["UF", "Absoluto_2021", "Absoluto_2022", "Taxa_2021", "Taxa_2022", "Variacao_Pct"]

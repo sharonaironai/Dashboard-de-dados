@@ -8,18 +8,7 @@ st.set_page_config(
 
 st.title("Dashboard de Dados")
 arquivo = 's2t6101.xls'
-
-if arquivo is not None:
-    if arquivo.endswith(('.xls', '.xlsx')):
-        df_raw = pd.read_excel(arquivo, skiprows=7, header=None)
-        df = df_raw.iloc[:28, :6].copy()
-        df.columns = ["UF", "Absoluto_2021", "Absoluto_2022", "Taxa_2021", "Taxa_2022", "Variacao_Pct"]
-        df["UF"] = df["UF"].astype(str).str.replace(r"\s*\(\d+\)", "", regex=True).str.strip()
-        for col in ["Absoluto_2021", "Absoluto_2022", "Taxa_2021", "Taxa_2022", "Variacao_Pct"]:
-            df[col] = pd.to_numeric(df[col], errors="coerce")
-    else:
-        df = pd.read_csv(arquivo)
-    
+ 
     col1, col2 = st.columns(2)
     col1.metric("Quantidade de registros", df.shape[0])
     col2.metric("Quantidade de colunas", df.shape[1])

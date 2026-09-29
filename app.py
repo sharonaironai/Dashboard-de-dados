@@ -1,12 +1,15 @@
 import streamlit as st
 import pandas as pd
 import plotly.express as px
+
 st.set_page_config(
     page_title="Dashboard de Dados",
     layout="wide"
 )
+
 st.title("Dashboard de Dados")
 arquivo = "dados.xls"
+
 if arquivo is not None:
     arquivo.endswith(('.xls', '.xlsx'))
     df_raw = pd.read_excel(arquivo, skiprows=7, header=None)

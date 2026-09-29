@@ -3,13 +3,11 @@ import streamlit as st
 import pandas as pd
 import plotly.express as px
 
-# Configuração da página
 st.set_page_config(
     page_title="Dashboard de Dados",
     layout="wide"
 )
 
-# Título, Autores e Introdução no topo
 st.title("Dashboard de Dados - Segurança Pública no Brasil")
 st.caption("Desenvolvido por: **Ada Mirella e Matheus Gabriel**")
 
@@ -25,7 +23,6 @@ NOME_ARQUIVO = "dados.csv"
 
 @st.cache_data
 def carregar_dados(caminho):
-    # Força a leitura como Excel, pois o arquivo na verdade é um .xls binário
     try:
         df_raw = pd.read_excel(caminho, skiprows=7, header=None)
         df = df_raw.iloc[:28, :6].copy()
@@ -41,7 +38,6 @@ def carregar_dados(caminho):
 if os.path.exists(NOME_ARQUIVO):
     df = carregar_dados(NOME_ARQUIVO)
 
-    # Indicadores de dimensão
     col1, col2 = st.columns(2)
     col1.metric("Quantidade de registros", df.shape[0])
     col2.metric("Quantidade de colunas", df.shape[1])
@@ -49,7 +45,6 @@ if os.path.exists(NOME_ARQUIVO):
     st.subheader("Visualização dos dados")
     st.dataframe(df.head(), use_container_width=True)
 
-    # Informações sobre a base
     st.subheader("Informações sobre a base")
     col_info1, col_info2, col_info3 = st.columns(3)
 
@@ -71,18 +66,15 @@ if os.path.exists(NOME_ARQUIVO):
         st.metric("Total de Linhas Duplicadas", qtd_duplicados)
         st.caption("Linhas 100% idênticas encontradas na base.")
 
-    # Tratamento de dados (remoção da linha 'Brasil' e duplicados)
     df = df.drop_duplicates()
     df_estados = df[df["UF"] != "Brasil"].copy()
 
     st.divider()
 
-    # Gráficos e Indicadores
     st.subheader("Gráficos e Indicadores")
     media_casos = df_estados["Absoluto_2022"].mean()
     st.metric("Média de Ocorrências em 2022 (por Estado)", f"{media_casos:,.2f}")
 
-    # Gráfico 1: Barras
     fig1 = px.bar(
         df_estados,
         x="UF",
@@ -96,8 +88,6 @@ if os.path.exists(NOME_ARQUIVO):
     **Análise do Gráfico 1:**  
     O gráfico de barras apresenta a distribuição dos registros absolutos por Unidade da Federação em 2022. Observa-se que estados com maiores contingentes populacionais acumulam o maior volume bruto de registros.
     """)
-
-    # Gráfico 2: Linhas
     fig2 = px.line(
         df_estados,
         x="UF",
@@ -114,7 +104,6 @@ if os.path.exists(NOME_ARQUIVO):
 
     st.divider()
 
-    # Conclusões
     st.subheader("Conclusões da Análise")
     st.markdown("""
     **O que esse dashboard representa?**  

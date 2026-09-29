@@ -5,10 +5,8 @@ st.set_page_config(
     page_title="Dashboard de Dados",
     layout="wide"
 )
-
-st.title("Dashboard de Dados")
 arquivo = "s2t6101.xls"
-
+st.title("Dashboard de Dados")
 if arquivo is not None:
     arquivo.endswith(('.xls', '.xlsx'))
     df_raw = pd.read_excel(arquivo, skiprows=7, header=None)

@@ -15,7 +15,7 @@ if arquivo is not None:
     df.columns = ["UF", "Absoluto_2021", "Absoluto_2022", "Taxa_2021", "Taxa_2022", "Variacao_Pct"]
     df["UF"] = df["UF"].astype(str).str.replace(r"\s*\(\d+\)", "", regex=True).str.strip()
     for col in ["Absoluto_2021", "Absoluto_2022", "Taxa_2021", "Taxa_2022", "Variacao_Pct"]:
-    df[col] = pd.to_numeric(df[col], errors="coerce")
+        df[col] = pd.to_numeric(df[col], errors="coerce")
     else:
         df = pd.read_csv(arquivo)
     col1, col2 = st.columns(2)

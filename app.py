@@ -8,10 +8,7 @@ st.set_page_config(
 )
 
 st.title("Dashboard de Dados")
-arquivo = st.file_uploader(
-    "Envie a planilha (.xls, .xlsx ou .csv)",
-    type=["xls", "xlsx", "csv"]
-)
+arquivo = 's2t6101.xls'
 
 if arquivo is not None:
     if arquivo.name.endswith(('.xls', '.xlsx')):

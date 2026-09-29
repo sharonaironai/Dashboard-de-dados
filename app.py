@@ -8,8 +8,7 @@ st.set_page_config(
 )
 
 st.title("Dashboard de Dados")
-arquivo = "dados.xls"
-
+arquivo = "dados.csv"
 if arquivo is not None:
     arquivo.endswith(('.xls', '.xlsx'))
     df_raw = pd.read_excel(arquivo, skiprows=7, header=None)
